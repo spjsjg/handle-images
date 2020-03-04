@@ -1,0 +1,22 @@
+name: Handle-Images
+
+on:
+  push:
+    branches: 
+      - master
+  schedule:
+    - cron: '0 18 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install build dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y git wget imagemagick
+    - name: Handle Images
+      run: |
+        /home/runner/work/handle-images/handle-images/handle-images 2020
